@@ -3,6 +3,8 @@ package org.linlinjava.litemall.core.system;
 import org.linlinjava.litemall.core.util.SystemInfoPrinter;
 import org.linlinjava.litemall.db.service.LitemallSystemConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -15,22 +17,13 @@ import java.util.Map;
  * 系统启动服务，用于设置系统配置信息、检查系统状态及打印系统信息
  */
 @Component
-class SystemInistService {
-    private SystemInistService systemInistService;
+class SystemInitService implements ApplicationRunner {
 
-
-    @Autowired
-    private Environment environment;
-
-    @PostConstruct
-    private void inist() {
-        systemInistService = this;
-        initConfigs();
-        SystemInfoPrinter.printInfo("Litemall 初始化信息", getSystemInfo());
-    }
-
+    private final Environment environment;
 
     private final static Map<String, String> DEFAULT_CONFIGS = new HashMap<>();
+    private final LitemallSystemConfigService litemallSystemConfigService;
+
 
     static {
         // 小程序相关配置默认值
@@ -57,8 +50,10 @@ class SystemInistService {
         DEFAULT_CONFIGS.put(SystemConfig.LITEMALL_MALL_QQ, "705144434");
     }
 
-    @Autowired
-    private LitemallSystemConfigService litemallSystemConfigService;
+    public SystemInitService(Environment environment, LitemallSystemConfigService litemallSystemConfigService) {
+        this.environment = environment;
+        this.litemallSystemConfigService = litemallSystemConfigService;
+    }
 
     private void initConfigs() {
         // 1. 读取数据库全部配置信息
@@ -117,5 +112,11 @@ class SystemInistService {
                         "," + SystemConfig.getTopicLimit() + "," + SystemConfig.getCatlogListLimit() + "," + SystemConfig.getCatlogMoreLimit());
 
         return infos;
+    }
+
+    @Override
+    public void run(ApplicationArguments args) {
+        initConfigs();
+        SystemInfoPrinter.printInfo("Litemall 初始化信息", getSystemInfo());
     }
 }

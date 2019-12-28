@@ -1,6 +1,7 @@
 spring:
   profiles:
-    active: db, core, admin, wx
+#    include: db, core, admin, wx
+    active: dev
   messages:
     encoding: UTF-8
 

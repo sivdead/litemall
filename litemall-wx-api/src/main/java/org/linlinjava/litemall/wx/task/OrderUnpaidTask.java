@@ -3,7 +3,7 @@ package org.linlinjava.litemall.wx.task;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.linlinjava.litemall.core.system.SystemConfig;
-import org.linlinjava.litemall.core.task.Task;
+import org.linlinjava.litemall.core.task.AbstractTask;
 import org.linlinjava.litemall.core.util.BeanUtil;
 import org.linlinjava.litemall.db.domain.LitemallOrder;
 import org.linlinjava.litemall.db.domain.LitemallOrderGoods;
@@ -15,7 +15,7 @@ import org.linlinjava.litemall.db.util.OrderUtil;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class OrderUnpaidTask extends Task {
+public class OrderUnpaidTask extends AbstractTask {
     private final Log logger = LogFactory.getLog(OrderUnpaidTask.class);
     private int orderId = -1;
 

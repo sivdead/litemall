@@ -60,8 +60,9 @@ public class SystemInfoPrinter {
     }
 
     private static void printLine(String head, String line) {
-        if (line == null)
+        if (line == null) {
             return;
+        }
 
         if (head.startsWith(CREATE_PART_COPPER)) {
             logger.info("");

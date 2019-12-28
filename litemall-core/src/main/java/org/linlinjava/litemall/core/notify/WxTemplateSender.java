@@ -27,12 +27,12 @@ public class WxTemplateSender {
     /**
      * 发送微信消息(模板消息),不带跳转
      *
-     * @param touser    用户 OpenID
-     * @param templatId 模板消息ID
-     * @param parms     详细内容
+     * @param toUser    用户 OpenID
+     * @param templateId 模板消息ID
+     * @param params     详细内容
      */
-    public void sendWechatMsg(String touser, String templatId, String[] parms) {
-        sendMsg(touser, templatId, parms, "", "", "");
+    public void sendWechatMsg(String toUser, String templateId, String[] params) {
+        sendMsg(toUser, templateId, params, "", "");
     }
 
     /**
@@ -44,28 +44,29 @@ public class WxTemplateSender {
      * @param page      跳转页面
      */
     public void sendWechatMsg(String touser, String templatId, String[] parms, String page) {
-        sendMsg(touser, templatId, parms, page, "", "");
+        sendMsg(touser, templatId, parms, page, "");
     }
 
-    private void sendMsg(String touser, String templatId, String[] parms, String page, String color,
+    private void sendMsg(String toUser, String templateId, String[] params, String page,
                          String emphasisKeyword) {
-        LitemallUserFormid userFormid = formIdService.queryByOpenId(touser);
-        if (userFormid == null)
+        LitemallUserFormid userFormId = formIdService.queryByOpenId(toUser);
+        if (userFormId == null) {
             return;
+        }
 
 
         WxMaTemplateMessage msg = new WxMaTemplateMessage();
-        msg.setTemplateId(templatId);
-        msg.setToUser(touser);
-        msg.setFormId(userFormid.getFormid());
+        msg.setTemplateId(templateId);
+        msg.setToUser(toUser);
+        msg.setFormId(userFormId.getFormid());
         msg.setPage(page);
-        msg.setColor(color);
+//        msg.setColor(color);
         msg.setEmphasisKeyword(emphasisKeyword);
-        msg.setData(createMsgData(parms));
+        msg.setData(createMsgData(params));
 
         try {
             wxMaService.getMsgService().sendTemplateMsg(msg);
-            if (formIdService.updateUserFormId(userFormid) == 0) {
+            if (formIdService.updateUserFormId(userFormId) == 0) {
                 logger.warn("更新数据已失效");
             }
         } catch (Exception e) {

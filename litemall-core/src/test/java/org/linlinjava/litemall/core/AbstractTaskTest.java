@@ -1,39 +1,28 @@
 package org.linlinjava.litemall.core;
 
-import com.google.common.primitives.Ints;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.linlinjava.litemall.core.task.Task;
+import org.linlinjava.litemall.core.task.AbstractTask;
 import org.linlinjava.litemall.core.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.Environment;
-import org.springframework.core.task.SyncTaskExecutor;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
-import java.util.concurrent.Delayed;
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class TaskTest {
-    private final Log logger = LogFactory.getLog(TaskTest.class);
+public class AbstractTaskTest {
+    private final Log logger = LogFactory.getLog(AbstractTaskTest.class);
     @Autowired
     private TaskService taskService;
 
-    private class DemoTask extends Task {
+    private class DemoTask extends AbstractTask {
 
         DemoTask(String id, long delayInMilliseconds){
             super(id, delayInMilliseconds);

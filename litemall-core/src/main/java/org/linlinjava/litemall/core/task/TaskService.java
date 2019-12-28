@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 @Component
 public class TaskService {
     private TaskService taskService;
-    private DelayQueue<Task> delayQueue =  new DelayQueue<Task>();
+    private DelayQueue<AbstractTask> delayQueue =  new DelayQueue<AbstractTask>();
 
     @PostConstruct
     private void init() {
@@ -19,7 +19,7 @@ public class TaskService {
             public void run() {
                 while (true) {
                     try {
-                        Task task = delayQueue.take();
+                        AbstractTask task = delayQueue.take();
                         task.run();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -29,14 +29,14 @@ public class TaskService {
         });
     }
 
-    public void addTask(Task task){
+    public void addTask(AbstractTask task){
         if(delayQueue.contains(task)){
             return;
         }
         delayQueue.add(task);
     }
 
-    public void removeTask(Task task){
+    public void removeTask(AbstractTask task){
         delayQueue.remove(task);
     }
 

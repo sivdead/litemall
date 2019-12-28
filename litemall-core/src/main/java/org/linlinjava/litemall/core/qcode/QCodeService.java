@@ -42,11 +42,7 @@ public class QCodeService {
                     getKeyName(groupon.getId().toString()));
 
             return storageInfo.getUrl();
-        } catch (WxErrorException e) {
-            logger.error(e.getMessage(), e);
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage(), e);
-        } catch (IOException e) {
+        } catch (WxErrorException | IOException e) {
             logger.error(e.getMessage(), e);
         }
 
@@ -77,11 +73,7 @@ public class QCodeService {
                     getKeyName(goodId));
 
             return litemallStorage.getUrl();
-        } catch (WxErrorException e) {
-            logger.error(e.getMessage(), e);
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage(), e);
-        } catch (IOException e) {
+        } catch (WxErrorException | IOException e) {
             logger.error(e.getMessage(), e);
         }
 

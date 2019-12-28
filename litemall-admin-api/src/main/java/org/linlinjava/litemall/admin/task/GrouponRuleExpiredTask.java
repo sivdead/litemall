@@ -2,7 +2,7 @@ package org.linlinjava.litemall.admin.task;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.linlinjava.litemall.core.task.Task;
+import org.linlinjava.litemall.core.task.AbstractTask;
 import org.linlinjava.litemall.core.util.BeanUtil;
 import org.linlinjava.litemall.db.domain.LitemallGroupon;
 import org.linlinjava.litemall.db.domain.LitemallGrouponRules;
@@ -13,7 +13,7 @@ import org.linlinjava.litemall.db.util.OrderUtil;
 
 import java.util.List;
 
-public class GrouponRuleExpiredTask extends Task {
+public class GrouponRuleExpiredTask extends AbstractTask {
     private final Log logger = LogFactory.getLog(GrouponRuleExpiredTask.class);
     private int grouponRuleId = -1;
 

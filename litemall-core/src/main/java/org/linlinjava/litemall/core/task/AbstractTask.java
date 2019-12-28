@@ -3,11 +3,11 @@ package org.linlinjava.litemall.core.task;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
-public abstract class Task implements Delayed, Runnable{
+public abstract class AbstractTask implements Delayed, Runnable{
     private String id = "";
     private long start = 0;
 
-    public Task(String id, long delayInMilliseconds){
+    public AbstractTask(String id, long delayInMilliseconds){
         this.id = id;
         this.start = System.currentTimeMillis() + delayInMilliseconds;
     }
@@ -29,12 +29,16 @@ public abstract class Task implements Delayed, Runnable{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if (!(o instanceof Task)) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
             return false;
         }
-        Task t = (Task)o;
+        if (!(o instanceof AbstractTask)) {
+            return false;
+        }
+        AbstractTask t = (AbstractTask)o;
         return this.id.equals(t.getId());
     }
 

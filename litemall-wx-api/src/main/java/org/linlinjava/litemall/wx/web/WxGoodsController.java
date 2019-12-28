@@ -1,7 +1,7 @@
 package org.linlinjava.litemall.wx.web;
 
 import com.github.pagehelper.PageInfo;
-import com.mysql.jdbc.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.linlinjava.litemall.core.system.SystemConfig;
@@ -258,7 +258,7 @@ public class WxGoodsController {
 		@Order @RequestParam(defaultValue = "desc") String order) {
 
 		//添加到搜索历史
-		if (userId != null && !StringUtils.isNullOrEmpty(keyword)) {
+		if (userId != null && !StringUtils.isBlank(keyword)) {
 			LitemallSearchHistory searchHistoryVo = new LitemallSearchHistory();
 			searchHistoryVo.setKeyword(keyword);
 			searchHistoryVo.setUserId(userId);
