@@ -28,9 +28,8 @@ public class HomeCacheManager {
             cacheData.remove(cacheKey);
         }
 
-        cacheData = new HashMap<>();
         //深拷贝
-        cacheData.putAll(data);
+        cacheData = new HashMap<>(data);
         cacheData.put("isCache", "true");
         //设置缓存有效期为10分钟
         cacheData.put("expireTime", LocalDateTime.now().plusMinutes(10));
@@ -47,19 +46,16 @@ public class HomeCacheManager {
      * @return
      */
     public static boolean hasData(String cacheKey) {
-        if (!ENABLE)
+        if (!ENABLE) {
             return false;
+        }
 
         Map<String, Object> cacheData = cacheDataList.get(cacheKey);
         if (cacheData == null) {
             return false;
         } else {
             LocalDateTime expire = (LocalDateTime) cacheData.get("expireTime");
-            if (expire.isBefore(LocalDateTime.now())) {
-                return false;
-            } else {
-                return true;
-            }
+            return !expire.isBefore(LocalDateTime.now());
         }
     }
 

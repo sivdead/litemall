@@ -29,6 +29,13 @@ public class LitemallRegionService {
         return regionMapper.selectByExample(example);
     }
 
+    public List<LitemallRegion> queryByRootId(Integer rootId){
+        LitemallRegionExample example = new LitemallRegionExample();
+        example.or().andRootIdEqualTo(rootId);
+        return regionMapper.selectByExample(example);
+    }
+
+
     public LitemallRegion findById(Integer id) {
         return regionMapper.selectByPrimaryKey(id);
     }

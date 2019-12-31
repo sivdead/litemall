@@ -4,6 +4,7 @@ import java.util.List;
 
 public class RegionVo {
     private Integer id;
+    private Integer pid;
     private String name;
     private Byte type;
     private Integer code;
@@ -48,5 +49,13 @@ public class RegionVo {
 
     public void setChildren(List<RegionVo> children) {
         this.children = children;
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 }

@@ -135,7 +135,7 @@ spring:
       url:  jdbc:mysql://182.61.21.45:3306/mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: mall
-      password: 123
+      password: mall@1228
       initial-size:  10
       max-active:  50
       min-idle:  10
